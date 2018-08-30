@@ -1,0 +1,50 @@
+*{margin:0;padding: 0;}
+
+body{
+	background: #fffffa;
+}
+
+header{
+	width: 100%;
+	overflow: hidden;
+	background: #FFBC45;
+	margin-bottom: 100px;
+}
+
+.wrapper{
+	width: 90%;
+	max-width: 1000px;
+	margin: auto;
+	overflow: hidden;
+}
+
+header .logo{
+	color: #f2f2;
+	font-size:10px;
+	line-height: 10px;
+	float: none;
+}
+
+header nav{
+	float: right;
+
+}
+
+header nav a {
+	 display: inline-block;
+	 color: #CF0972;
+	 text-decoration: none;
+	 padding: 10px 20px;
+	 line-height: normal;
+	 font-size: 30px;
+	 font-weight: bold;
+	 -webkit-transition: all 500ms ease;
+	 -o-transition: all 500ms ease;
+	 transition:all 500ms ease ;
+
+}
+
+header nav a:hover {
+	background: #E26703;
+	border-radius: 40px;
+}
