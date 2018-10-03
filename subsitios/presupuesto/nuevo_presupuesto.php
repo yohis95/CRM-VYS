@@ -30,6 +30,24 @@ $titulo_sitio='crm - vys';
 	<link rel="stylesheet" type="text/css" href="../../css/util.css">
 	<link rel="stylesheet" type="text/css" href="../../css/main.css">
 <!--===============================================================================================-->
+	<script language="javascript" type="text/javascript">
+
+function cancelar() {
+	document.formulario.action = "";
+	document.formulario.submit();
+}
+
+
+function agregar() {		
+	
+			document.formulario.action = "procesos/agregar.php";
+			document.formulario.submit();
+	
+}
+</script>
+
+
+
 	<style type="text/css">
 		body{
 			background: url(../../images/fondo.jpg);
@@ -63,7 +81,7 @@ margin-top: 70px;
 		<div class="container-login100" style="background-image: url('../../images/fondo.jpg');">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
 				<!--Action y method lo agregue para enlazarlo al archivo de php-->
-				<form class="login100-form validate-form" action="procesos/agregar.php" method="POST">
+				<form class="login100-form validate-form"  name="formulario" method="POST">
 					<span class="login100-form-title p-b-49">
 				Nuevo Presupuesto
 					</span>
@@ -85,51 +103,12 @@ margin-top: 70px;
 				
 					</div>
 
-					<div class="wrap-input100 validate-input">
-						<i class="fa fa-lock" aria-hidden="true"></i>
-						<span class="label-input100">Estado</span>	
-						<input class="input100" type="text" name="apellido" id="estado" placeholder="Ingrese su apellido" required="">
-				
-					</div>
-
-					<div class="wrap-input100 validate-input">
-						<i class="fa fa-lock" aria-hidden="true"></i>
-						<span class="label-input100">Estado</span>	
-						<input class="input100" type="text" name="apellido" id="estado" placeholder="Ingrese su apellido" required="">
-				
-					</div>
-
-					<div class="wrap-input100 validate-input">
-						<i class="fa fa-lock" aria-hidden="true"></i>
-						<span class="label-input100">Estado</span>	
-						<input class="input100" type="text" name="apellido" id="estado" placeholder="Ingrese su apellido" required="">
-				
-					</div>
-
-					<div class="wrap-input100 validate-input">
-						<i class="fa fa-lock" aria-hidden="true"></i>
-						<span class="label-input100">Estado</span>	
-						<input class="input100" type="text" name="apellido" id="estado" placeholder="Ingrese su apellido" required="">
-				
-					</div>
-					<div class="wrap-input100 validate-input">
-						<i class="fa fa-lock" aria-hidden="true"></i>
-						<span class="label-input100">Estado</span>	
-						<input class="input100" type="text" name="apellido" id="estado" placeholder="Ingrese su apellido" required="">
-				
-					</div><div class="wrap-input100 validate-input">
-						<i class="fa fa-lock" aria-hidden="true"></i>
-						<span class="label-input100">Estado</span>	
-						<input class="input100" type="text" name="apellido" id="estado" placeholder="Ingrese su apellido" required="">
-				
-					</div>
 
 
 
 					
-					
-					
-					<input type="submit" name="" value="Registrar">
+                      <input class="btn btn-primary" type="button" value="Cancelar" onClick="cancelar()">
+                      <input class="btn btn-primary" type="button" value="Registrar" onClick="agregar()">	 
 
 						
 				</form>
