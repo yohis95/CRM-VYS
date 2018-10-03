@@ -25,38 +25,41 @@
 require('../../../objetos/generales/conexion.php');
 
 
-		$id_presupuesto=17;
-		$nombre="prueba";
-		$estado="prueba";
+		
+		
+		$nombre = $_POST['nombre'];
+		$estado = $_POST['estado'];
 
 
-
-		/*Para definir el id_presupuesto
-		//se busca el ultimo id registrado para sumarle uno y obtener el nuevo id	
-			$consulta_ultimo_id = "SELECT id_presupuesto FROM tbl_presupuesto ORDER BY id_presupuesto DESC";
+		
+		/*//se busca el ultimo id registrado para sumarle uno y obtener el nuevo id	
+			$consulta_ultimo_id = "SELECT idPresupuesto FROM tbl_presupuesto ORDER BY idPresupuesto ASC";
 			$resultado_ultimo_id = mysql_query($consulta_ultimo_id);
 
 			$rs_ultimo_id = mysql_fetch_array($resultado_ultimo_id, MYSQL_ASSOC);
 
 			//Si hay resultados, le sumo 1 caso contrario coloco 1 al id actual
 			if (mysql_num_rows($resultado_ultimo_id) != 0) {
-				$id_presupuesto = $rs_ultimo_id["id_npresupuesto"] + 1;
+				$id_presupuesto = $rs_ultimo_id["idPresupuesto"] + 1;
+				echo 'Pasa aca';
 			}
 			else{
 				$id_presupuesto= 1;
-			} 
-			*/
+				echo 'Pasa por aca';
+			}*/ 
+			
 
 
-$consulta_agregar = "INSERT INTO tbl_presupuesto (id_presupuesto, nombre, estado) VALUES($id_presupuesto, '$nombre', '$estado')";
+$consulta_agregar = "INSERT INTO tbl_presupuesto (idPresupuesto, idEstado, idCliente) VALUES($id_presupuesto, $nombre, $estado)";
 $resultado_agregar = mysqli_query($connection , $consulta_agregar);
 	
 if($resultado_agregar){
 	//vuelve a la pagina anterior con exito	
-	$pagina = "../nuevo_presupuesto.php";
+	$pagina = "";
 }
 else{
 	die("SE HA PRODUCIDO UN ERROR. ");
+	
 }
 		?>
 
