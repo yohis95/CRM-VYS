@@ -21,7 +21,7 @@
 						<a href="#" class="nav-link" style="color: black;">Clientes</a>
 					</li>
 					<li class="nav-item ">
-						<a href="subsitios/presupuesto/nuevo_presupuesto.php" class="nav-link" style="color: black;">Prespuestos</a>
+						<a href="subsitios/presupuesto/seleccion_cliente.php" class="nav-link" style="color: black;">Prespuestos</a>
 					</li>
 					<li class="nav-item">
 						<a href="#" class="nav-link" style="color: black;">Estadisticas</a>
