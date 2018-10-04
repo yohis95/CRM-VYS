@@ -26,7 +26,7 @@ require('../../../objetos/generales/conexion.php');
 
 
 		
-		
+		$id_presupuesto=7;
 		$nombre = $_POST['nombre'];
 		$estado = $_POST['estado'];
 
@@ -55,10 +55,10 @@ $resultado_agregar = mysqli_query($connection , $consulta_agregar);
 	
 if($resultado_agregar){
 	//vuelve a la pagina anterior con exito	
-	$pagina = "";
+	$pagina = "../nuevo_presupuesto.php?resultado=exito";
 }
 else{
-	die("SE HA PRODUCIDO UN ERROR. ");
+	$pagina = "../nuevo_presupuesto.php?resultado=fracaso";
 	
 }
 		?>
