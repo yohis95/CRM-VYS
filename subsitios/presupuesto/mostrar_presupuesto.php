@@ -2,7 +2,7 @@
 require('../../objetos/generales/conexion.php');
 
 $id_presupuesto = $_GET["id_presupuesto"];
-$accion = $_GET["accion"];
+
 
 ?>
 
@@ -50,25 +50,12 @@ $accion = $_GET["accion"];
 
 
 <script type="text/javascript">
-function cancelar() {
+function volver_listado() {
 	document.formulario.action = "";
 	document.formulario.submit();
 }
 
 
-function agregar() {		
-	
-			document.formulario.action = "procesos/agregar_producto.php?id_presupuesto=<?=$id_presupuesto?>&otro=no";
-			document.formulario.submit();
-	
-}
-
-function agregar_producto() {		
-	
-			document.formulario.action = "procesos/agregar_producto.php?id_presupuesto=<?=$id_presupuesto?>&otro=si";
-			document.formulario.submit();
-	
-}
 </script>
 
 
@@ -107,6 +94,16 @@ margin-top: 70px;
 	border-radius: 14px;
 	}
 
+.subtitulo{
+	color: #D01262;
+	  display: block;
+  font-weight: 600;
+  padding-bottom:20px;
+
+  font-size: 23px;
+  line-height: 1.2;
+}
+
 	</style>
 }
 }
@@ -122,10 +119,56 @@ margin-top: 70px;
 		<div class="container">
 			<div class="contenedor_formulario p-l-55 p-r-55 p-t-65 p-b-54">
 				
-				<?php
+				
 
-			if($accion == "otro"){
+						<form  name="formulario" method="POST">
+					<span class="titulo_formulario p-b-49">
+				Presupuesto
+					</span>
 
+					<div class="subtitulo">Cliente</div>
+
+					<?php
+
+				$consulta_presupuesto = "SELECT * FROM tbl_presupuesto WHERE idPresupuesto = $id_presupuesto order by idPresupuesto DESC";
+				$resultado_presupuesto = mysqli_query($connection , $consulta_presupuesto);
+				$rs_presupuesto = mysqli_fetch_array($resultado_presupuesto, MYSQL_ASSOC);
+						$id_cliente = $rs_presupuesto['idCliente'];
+
+						$consulta_cliente = "SELECT * FROM tbl_cliente WHERE idCliente = $id_cliente order by idCliente DESC";
+						$resultado_cliente = mysqli_query($connection , $consulta_cliente);
+						$rs_cliente = mysqli_fetch_array($resultado_cliente, MYSQL_ASSOC);
+
+								$nombre = $rs_cliente['nombre'];
+								$apellido = $rs_cliente['apellido'];
+								$dni = $rs_cliente['dni'];
+								$domicilio = $rs_cliente['domicilio'];
+								$email = $rs_cliente['email'];
+								$telefono = $rs_cliente['telefono'];
+								$localidad = $rs_cliente['localidad'];
+								$provincia = $rs_cliente['provincia'];
+
+						?>
+
+							<div class=" contenedor_producto_existente">
+
+								<p><span style="font-size: 18px; font-weight: 500;"><?=$nombre?> <?=$apellido?></span>  <strong> - DNI:</strong> <?=$dni?></p>
+								<p><strong>Domicilio:</strong> <?=$domicilio?>   <strong>- Localidad:</strong> <?=$localidad?>   <strong>- Provincia:</strong>   <?=$provincia?></p>
+								<p><strong>Email:</strong> <?=$email?>     <strong>-  Telefono:</strong> <?=$telefono?></p>
+								
+
+
+							</div>
+
+
+					
+
+
+
+
+					<div class="subtitulo">Productos</div>
+
+					<?php
 
 				$consulta_itemproductos = "SELECT * FROM tbl_itemproducto WHERE idPresupuesto = $id_presupuesto order by idItemProducto DESC";
 				$resultado_itemproductos = mysqli_query($connection , $consulta_itemproductos);
@@ -166,66 +209,13 @@ margin-top: 70px;
 
 
 
-					<?php
 
+					<?php } ?>
 
-				}
-
-			}
-
-				?>
-
-
-				<form  name="formulario" method="POST">
-					<span class="titulo_formulario p-b-49">
-				Nuevo Presupuesto - Agregar Producto
-					</span>
-
-					<div class="wrap-input100 validate-input m-b-23">
-						
-
-						<div class="form-group col-md-6">
- 										<label for="id_cliente">Producto</label>
-										<select class="form-control" id="id_producto" name="id_producto">
-										<option id="id_producto" value="">Seleccione un Producto</option>
-	   										
- 						<?php
-
- 				$consulta_productos = "SELECT * FROM tbl_producto ORDER BY idProducto ASC";
-				$resultado_productos = mysqli_query($connection , $consulta_productos);
-
-				while($rs_productos = mysqli_fetch_array($resultado_productos, MYSQL_ASSOC)) {
-					?>
-
-			 								<option id="id_producto" value="<?=$rs_productos['idProducto']?>"><?=$rs_productos['nombre']?> - Precio: $<?=$rs_productos['precioUnitario']?></option>
-	   										
-
-	   									<?php } ?>
-   										</select>
-
-						</div>
-
-						<div class="form-group col-md-2">
- 										<label for="cantidad">Cantidad</label>
- 									   <input type="text" class="form-control" id="cantidad" name="cantidad">
-
-						</div>
-	
-					
-					
-				
-					</div>
-</br>
-
-					<div class="form-group col-md-6">
-		                <input type="submit" class="btn btn-primary" value="Cancelar" onClick="cancelar()">
-		                <input type="submit" class="btn btn-primary" value="Agregar otro Producto" onClick="agregar_producto()">
-		                <input type="submit" class="btn btn-primary"   value="Continuar" onClick="agregar()">
-		            </div>    
-
-				
-
-						
+						<div class="form-group">
+		                <input type="submit" class="btn btn-primary" value="Presupuesto Terminado" onClick="volver_listado()">
+		       
+		            	</div>    
 				</form>
 			</div>
 		</div>

@@ -107,7 +107,7 @@ margin-top: 70px;
 				<!--Action y method lo agregue para enlazarlo al archivo de php-->
 				<form  name="formulario" method="POST">
 					<span class="titulo_formulario p-b-49">
-				Nuevo Presupuesto
+				Nuevo Presupuesto - Agregar Cliente
 					</span>
 
 					<div class="wrap-input100 validate-input m-b-23">
@@ -158,22 +158,7 @@ margin-top: 70px;
 
 	<div id="dropDownSelect1"></div>
 	
-<!--===============================================================================================-->
-	<script src="../../vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="../../vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-	<script src="../../vendor/bootstrap/js/popper.js"></script>
-	<script src="../../vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="../../vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-	<script src="../../vendor/daterangepicker/moment.min.js"></script>
-	<script src="../../vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script src="../../vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-	<script src="../../js/main.js"></script>
+
 
 </body>
 </html>
