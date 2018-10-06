@@ -1,5 +1,8 @@
 <?php
+session_start();
 require('../../objetos/generales/conexion.php');
+$link_error="../../index.php?error_usuario=si";
+require_once('../../objetos/generales/validar.php'); 
 
 
 
@@ -8,14 +11,47 @@ require('../../objetos/generales/conexion.php');
 <!DOCTYPE html>
 <html>
 <head>
-	<title>HOLA</title>
+	<title>CRM VYS</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="../../images/icons/favicon.ico"/>
-<!--===============================================================================================-->
+<link rel="icon" type="image/png" href="../../favicon.ico"/>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+function cancelar() {
+	document.formulario.action = "";
+	document.formulario.submit();
+}
+
+
+function agregar() {		
+	
+			document.formulario.action = "procesos/agregar_cliente.php";
+			document.formulario.submit();
+	
+}
+
+function validar_form(theForm) {
+	
+	if (theForm.nombre.value == ""){
+		alert("El nombre es un dato requerido.");
+		theForm.nombre.focus();
+		return (false);
+	}
+	
+	if (theForm.apellido.value == ""){
+		alert("La apellido es un dato requerido.");
+		theForm.apellido.focus();
+		return (false);
+	}
+	
+	
+		
+	return (true);
+}
+</script>
+
 
 <style type="">
 	
@@ -45,37 +81,17 @@ require('../../objetos/generales/conexion.php');
   width: 30%;
   align-content: left;
   }
-</style>
 
-
-<script type="text/javascript">
-function cancelar() {
-	document.formulario.action = "";
-	document.formulario.submit();
+body{
+	background: url(../../images/fondo.jpg);
 }
-
-
-function agregar() {		
 	
-			document.formulario.action = "procesos/agregar_cliente.php";
-			document.formulario.submit();
-	
-}
-</script>
-
-
-
-	<style type="text/css">
-		body{
-			background: url(../../images/fondo.jpg);
-		}
-		header {
+header {
   background: rgba(0,0,0,0.9);
   width: 100%;
   position: fixed;
   z-index: 100;
   margin-top:-25px;
-
 }
 
 
@@ -105,14 +121,13 @@ margin-top: 70px;
 
 	
 		<div class="container">
-			<div class="contenedor_formulario p-l-55 p-r-55 p-t-65 p-b-54">
+			<div class="contenedor_formulario">
 				<!--Action y method lo agregue para enlazarlo al archivo de php-->
-				<form  name="formulario" method="post">
-					<span class="titulo_formulario p-b-49">
+				<form  name="formulario" method="post" onSubmit="return validar_form(this)">
+					<span class="titulo_formulario ">
 				Nuevo Cliente
 					</span>
 
-					<div class="wrap-input100 validate-input m-b-23">
 						
 
 						<div class="form-group">
@@ -180,25 +195,6 @@ margin-top: 70px;
 		
 
 	
-
-	<div id="dropDownSelect1"></div>
-	
-<!--===============================================================================================-->
-	<script src="../../vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="../../vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-	<script src="../../vendor/bootstrap/js/popper.js"></script>
-	<script src="../../vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="../../vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-	<script src="../../vendor/daterangepicker/moment.min.js"></script>
-	<script src="../../vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script src="../../vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-	<script src="../../js/main.js"></script>
 
 </body>
 </html>
