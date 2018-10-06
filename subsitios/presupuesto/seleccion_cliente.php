@@ -1,5 +1,8 @@
 <?php
+session_start();
 require('../../objetos/generales/conexion.php');
+$link_error="../../index.php?error_usuario=si";
+require_once('../../objetos/generales/validar.php'); 
 
 
 
@@ -8,14 +11,41 @@ require('../../objetos/generales/conexion.php');
 <!DOCTYPE html>
 <html>
 <head>
-	<title>HOLA</title>
+	<title>CRM VYS</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="../../images/icons/favicon.ico"/>
-<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="../../favicon.ico"/>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+function cancelar() {
+	document.formulario.action = "";
+	document.formulario.submit();
+}
+
+
+function agregar() {		
+	
+			document.formulario.action = "procesos/agregar.php";
+			document.formulario.submit();
+	
+}
+
+function validar_form(theForm) {
+	
+	if ( theForm.id_cliente.value == 0){
+		alert("Debe seleccionar un cliente");
+		theForm.id_cliente.focus();
+		return (false);
+	}
+
+		
+	return (true);
+}
+
+
+</script>
 
 <style type="">
 	
@@ -45,31 +75,13 @@ require('../../objetos/generales/conexion.php');
   width: 30%;
   align-content: left;
   }
-</style>
 
 
-<script type="text/javascript">
-function cancelar() {
-	document.formulario.action = "";
-	document.formulario.submit();
+body{
+	background: url(../../images/fondo.jpg);
 }
 
-
-function agregar() {		
-	
-			document.formulario.action = "procesos/agregar.php";
-			document.formulario.submit();
-	
-}
-</script>
-
-
-
-	<style type="text/css">
-		body{
-			background: url(../../images/fondo.jpg);
-		}
-		header {
+header {
   background: rgba(0,0,0,0.9);
   width: 100%;
   position: fixed;
@@ -88,8 +100,12 @@ margin-top: 70px;
 	background: #EE8A12 !important;
 	 border:1px solid #EE8A12 !important;
 }
-	</style>
-}
+
+
+</style>
+
+
+
 </head>
 <body>
 
@@ -103,14 +119,13 @@ margin-top: 70px;
 
 	
 		<div class="container">
-			<div class="contenedor_formulario p-l-55 p-r-55 p-t-65 p-b-54">
-				<!--Action y method lo agregue para enlazarlo al archivo de php-->
-				<form  name="formulario" method="POST">
+			<div class="contenedor_formulario">
+				<form  name="formulario" method="POST" onSubmit="return validar_form(this)">
 					<span class="titulo_formulario p-b-49">
 				Nuevo Presupuesto - Agregar Cliente
 					</span>
 
-					<div class="wrap-input100 validate-input m-b-23">
+					
 						
 
 						<div class="form-group col-md-6">
@@ -138,7 +153,7 @@ margin-top: 70px;
 
 					
 				
-					</div>
+				
 
 
 					<div class="form-group ">
@@ -153,12 +168,5 @@ margin-top: 70px;
 			</div>
 		</div>
 		
-
-	
-
-	<div id="dropDownSelect1"></div>
-	
-
-
 </body>
 </html>

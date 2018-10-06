@@ -1,5 +1,8 @@
 <?php
+session_start();
 require('../../objetos/generales/conexion.php');
+$link_error="../../index.php?error_usuario=si";
+require_once('../../objetos/generales/validar.php'); 
 
 $id_presupuesto = $_GET["id_presupuesto"];
 
@@ -9,14 +12,21 @@ $id_presupuesto = $_GET["id_presupuesto"];
 <!DOCTYPE html>
 <html>
 <head>
-	<title>HOLA</title>
+	<title>CRM VYS</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="../../images/icons/favicon.ico"/>
-<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="../../favicon.ico"/>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+function volver_listado() {
+	document.formulario.action = "";
+	document.formulario.submit();
+}
+
+
+</script>
+
 
 <style type="">
 	
@@ -46,25 +56,12 @@ $id_presupuesto = $_GET["id_presupuesto"];
   width: 30%;
   align-content: left;
   }
-</style>
 
-
-<script type="text/javascript">
-function volver_listado() {
-	document.formulario.action = "";
-	document.formulario.submit();
+body{
+ background: url(../../images/fondo.jpg);
 }
 
-
-</script>
-
-
-
-	<style type="text/css">
-		body{
-			background: url(../../images/fondo.jpg);
-		}
-		header {
+header {
   background: rgba(0,0,0,0.9);
   width: 100%;
   position: fixed;
@@ -105,8 +102,7 @@ margin-top: 70px;
 }
 
 	</style>
-}
-}
+
 </head>
 <body>
 
@@ -117,12 +113,12 @@ margin-top: 70px;
 	</header>
 	
 		<div class="container">
-			<div class="contenedor_formulario p-l-55 p-r-55 p-t-65 p-b-54">
+			<div class="contenedor_formulario">
 				
 				
 
 						<form  name="formulario" method="POST">
-					<span class="titulo_formulario p-b-49">
+					<span class="titulo_formulario ">
 				Presupuesto
 					</span>
 
@@ -222,7 +218,7 @@ margin-top: 70px;
 
 	
 
-	<div id="dropDownSelect1"></div>
+
 	
 
 

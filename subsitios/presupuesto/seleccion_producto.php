@@ -1,5 +1,8 @@
 <?php
+session_start();
 require('../../objetos/generales/conexion.php');
+$link_error="../../index.php?error_usuario=si";
+require_once('../../objetos/generales/validar.php'); 
 
 $id_presupuesto = $_GET["id_presupuesto"];
 $accion = $_GET["accion"];
@@ -9,14 +12,35 @@ $accion = $_GET["accion"];
 <!DOCTYPE html>
 <html>
 <head>
-	<title>HOLA</title>
+	<title>CRM VYS</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="../../images/icons/favicon.ico"/>
-<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="../../favicon.ico"/>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+function cancelar() {
+	document.formulario.action = "";
+	document.formulario.submit();
+}
+
+
+function agregar() {		
+	
+			document.formulario.action = "procesos/agregar_producto.php?id_presupuesto=<?=$id_presupuesto?>&otro=no";
+			document.formulario.submit();
+	
+}
+
+function agregar_producto() {		
+	
+			document.formulario.action = "procesos/agregar_producto.php?id_presupuesto=<?=$id_presupuesto?>&otro=si";
+			document.formulario.submit();
+	
+}
+</script>
 
 <style type="">
 	
@@ -46,38 +70,12 @@ $accion = $_GET["accion"];
   width: 30%;
   align-content: left;
   }
-</style>
 
-
-<script type="text/javascript">
-function cancelar() {
-	document.formulario.action = "";
-	document.formulario.submit();
+body{
+ background: url(../../images/fondo.jpg);	
 }
 
-
-function agregar() {		
-	
-			document.formulario.action = "procesos/agregar_producto.php?id_presupuesto=<?=$id_presupuesto?>&otro=no";
-			document.formulario.submit();
-	
-}
-
-function agregar_producto() {		
-	
-			document.formulario.action = "procesos/agregar_producto.php?id_presupuesto=<?=$id_presupuesto?>&otro=si";
-			document.formulario.submit();
-	
-}
-</script>
-
-
-
-	<style type="text/css">
-		body{
-			background: url(../../images/fondo.jpg);
-		}
-		header {
+header {
   background: rgba(0,0,0,0.9);
   width: 100%;
   position: fixed;
@@ -107,9 +105,8 @@ margin-top: 70px;
 	border-radius: 14px;
 	}
 
-	</style>
-}
-}
+</style>
+
 </head>
 <body>
 
@@ -232,7 +229,7 @@ margin-top: 70px;
 
 	
 
-	<div id="dropDownSelect1"></div>
+
 	
 
 
