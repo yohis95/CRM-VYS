@@ -1,7 +1,12 @@
 <?php
+session_start();
+require_once('/objetos/generales/conexion.php'); 
 
-
-
+$error_usuario = "";
+foreach ($_GET as $key => $value ) {
+   if (isset($_GET[$key]))
+   	$$key = $value;
+}
 
 ?>
 
@@ -12,66 +17,78 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="../../images/icons/favicon.ico"/>
+	<link rel="icon" type="image/png" href="favicon.ico"/>
 <!--===============================================================================================-->
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+
+function validar_logueo(theForm) {
+	
+	if (theForm.usuario.value == ""){
+		alert("El usuario es un dato requerido.");
+		theForm.usuario.focus();
+		return (false);
+	}
+	
+	if (theForm.clave.value == ""){
+		alert("La clave es un dato requerido.");
+		theForm.clave.focus();
+		return (false);
+	}
+	
+	
+		
+	return (true);
+}
+
+</script>
 
 <style type="">
 	
 	.contenedor_formulario {
  
   padding: 20px;
-  margin-left:150px;
-  margin: 20px;
+
   background: #fff;
-  border-radius: 10px;
+  border-radius: 1px;
   overflow: hidden;
 
 
 }
 
-.titulo_formulario {
-  display: block;
+.contenedor_formulario_web{
+	padding: 20px;
+
+  background: #fff;
+  border-radius: 1px;
+  overflow: hidden;
+
+}
+
+.titulo_logueo{
   font-weight: 600;
   padding-bottom:20px;
-
-  font-size: 30px;
+  font-size: 22px;
   color: #EE8A12;
   line-height: 1.2;
 
 }
 
-
-
-.logo{
- 
-  width: 30%;
-  align-content: left;
-  }
-</style>
-
-
-<script type="text/javascript">
-
-
-
-function validar() {		
-	
-			document.formulario.action = "validacion.php";
-			document.formulario.submit();
-	
+.texto_logueo{
+	display: inline-block;
+	font-size: 22px;
+  	color: #EE8A12;
+  	padding-left: 15px;
 }
-</script>
 
 
-
-	<style type="text/css">
-		body{
-			background: url(../../images/fondo.jpg);
-		}
-		header {
+body{	
+	background: url(images/fondo.jpg);
+}
+header {
   background: rgba(0,0,0,0.9);
   width: 100%;
   position: fixed;
@@ -79,13 +96,6 @@ function validar() {
   margin-top:-25px;
 
 }
-
-body{
-			background: url(images/fondo.jpg);
-		}
-
-
-
 .contenedor_formulario{
 
 margin-top: 70px;
@@ -93,56 +103,61 @@ margin-top: 70px;
 	}
 
 .btn-primary{
+
 	background: #EE8A12 !important;
 	 border:1px solid #EE8A12 !important;
 }
+
+
 	</style>
 
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-dark " style="background: white; border-bottom: 1px solid #D01262">
-			<a href="#" class="navbar-brand"><img src="images/logo.png" width="50"></a>
-			
-		</nav>
+	
 
 
 
 	
 		<div class="container">
-			<div class="contenedor_formulario p-l-55 p-r-55 p-t-65 p-b-54">
+			<div class="col-xs-12 col-md-6 contenedor_formulario">
+
+
+				<div class="titulo_logueo"> <img src="images/logo.png" width="20%"><div class="texto_logueo"> Acceso a VYS</div></div>
+				<?php
+				if  ($error_usuario == "si") {
+				?>
+					 <div class="alert alert-dismissible alert-danger">
+				  		<strong>Ooops!</strong> Acceso denegado.
+					 </div>
+
+
+				<?php
+				}  
+				?>
+				
 				<!--Action y method lo agregue para enlazarlo al archivo de php-->
-				<form name="formulario" method="post">
-					<span class="titulo_formulario p-b-49">
-					</span>
-
-					<div class="wrap-input100 validate-input m-b-23">
-						
-
-						<div class="form-group">
+				<form name="formulario" action="principal.php" onSubmit="return validar_logueo(this)">
+					
+			
  										
 						
-			<div class="form-group col-md-6"> 
-				<label for="usuario">Usuario</label> <br>
-    			<input type="text" class="form-control" name="usuario" id="usuario" placeholder="Ingrese su usuario">
-    		</div>
+					<div class="form-group "> 
+						<label for="usuario">Usuario</label> 
+		    			<input type="text" class="form-control" name="usuario" id="usuario" placeholder="Ingrese su usuario">
+		    		</div>
 
-    		<div class="form-group col-md-6"> <br>
-    			<label for="clave">Clave</label><br>
-    			<input type="text" class="form-control" name="clave" id="clave" placeholder="Ingrese su clave">
-    		</div>
+		    		<div class="form-group "> <br>
+		    			<label for="clave">Clave</label>
+		    			<input type="password" class="form-control" name="clave" id="clave" placeholder="Ingrese su clave">
+		    		</div>
 
     		
+					<br>
 
 
-    	<!--	<div class="form-group ">
- 										<label for="email">Nombre y apellido</label>
- 									   <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Ingrese aquí su nombre">
 
-						</div>-->
-
-
-					<div class="form-group "> <br>
+					<div class="form-group "> 
 		                
 		                <input type="submit" class="btn btn-primary"   value="Ingresar" onClick="validar()">
 		            </div>    
@@ -157,24 +172,7 @@ margin-top: 70px;
 
 	
 
-	<div id="dropDownSelect1"></div>
-	
-<!--===============================================================================================-->
-	<script src="../../vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="../../vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-	<script src="../../vendor/bootstrap/js/popper.js"></script>
-	<script src="../../vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="../../vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-	<script src="../../vendor/daterangepicker/moment.min.js"></script>
-	<script src="../../vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script src="../../vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-	<script src="../../js/main.js"></script>
+
 
 </body>
 </html>
