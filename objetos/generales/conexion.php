@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Conectar a base de datos</title>
-</head>
-<body>
+
 
 <?php 
 			
@@ -20,5 +15,3 @@
 
  ?>
 
-</body>
-</html>
