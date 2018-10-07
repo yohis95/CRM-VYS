@@ -20,7 +20,7 @@ $id_presupuesto = $_GET["id_presupuesto"];
 
 <script type="text/javascript">
 function cancelar() {
-	document.formulario.action = "";
+	document.formulario.action = "procesos/eliminar_presupuesto.php?id_presupuesto=<?=$id_presupuesto?>&accion=por_cancelar";
 	document.formulario.submit();
 }
 

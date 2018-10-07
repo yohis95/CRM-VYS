@@ -20,7 +20,7 @@ $id_presupuesto = $_GET["id_presupuesto"];
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 function volver_listado() {
-	document.formulario.action = "";
+	document.formulario.action = "listado.php?resultado=exito";
 	document.formulario.submit();
 }
 

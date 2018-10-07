@@ -20,7 +20,7 @@ require_once('../../objetos/generales/validar.php');
 
 <script type="text/javascript">
 function cancelar() {
-	document.formulario.action = "";
+	document.formulario.action = "listado.php";
 	document.formulario.submit();
 }
 
