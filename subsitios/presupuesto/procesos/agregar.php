@@ -3,7 +3,6 @@
 
 require('../../../objetos/generales/conexion.php');
 
-
 		
 
 		$id_cliente = $_POST['id_cliente'];
@@ -22,7 +21,7 @@ if($resultado_agregar){
 	$pagina = "../seleccion_producto.php?id_presupuesto=$id_presupuesto&accion=primero";
 }
 else{
-	$pagina = "../listado.php?resultado=fracaso";
+	$pagina = "eliminar_presupuesto.php?id_presupuesto=$id_presupuesto&accion=por_error";
 	
 }
 		?>

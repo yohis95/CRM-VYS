@@ -25,12 +25,12 @@ if($resultado_agregar){
 
 	if($otro == "no"){
 
-	$pagina = "../mostrar_presupuesto.php?id_presupuesto=$id_presupuesto";
+	$pagina = "../seleccion_estado.php?id_presupuesto=$id_presupuesto";
 
 	}
 }
 else{
-	$pagina = "../listado.php?resultado=fracaso";
+	$pagina = "eliminar_presupuesto.php?id_presupuesto=$id_presupuesto&accion=por_error";
 	
 }
 		?>
