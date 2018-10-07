@@ -40,6 +40,12 @@ function agregar_producto() {
 			document.formulario.submit();
 	
 }
+function eliminar_producto(id_producto){
+	if (confirm("¿Est\xE1 seguro que desea eliminar el producto?")){
+		document.listado.action = "procesos/eliminar.php?id_producto="+id_producto;
+		document.listado.submit();
+	}
+}
 </script>
 
 <style type="">
@@ -154,7 +160,7 @@ margin-top: 70px;
 							<p><strong>Cantidad:</strong> <?=$cantidad?></p>
 							<p><strong>Precio total:</strong> $<?=$precioTotal?></p>
 
-							<a href="procesos/eliminar_prodcuto.php?id_item_producto=$id_item_producto"><p style="font-weight: 600; text-align: right; text-decoration: none; color: red;">Eliminar</p></a>
+							<a href="procesos/eliminar_producto.php?id_presupuesto=<?=$id_presupuesto?>&id_item_producto=<?=$id_item_producto?>&destino=seleccion"><p style="font-weight: 600; text-align: right; text-decoration: none; color: red;">Eliminar</p></a>
 							
 
 

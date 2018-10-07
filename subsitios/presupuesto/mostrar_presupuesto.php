@@ -95,7 +95,7 @@ margin-top: 70px;
 	color: #D01262;
 	  display: block;
   font-weight: 600;
-  padding-bottom:20px;
+  padding-top:20px;
 
   font-size: 23px;
   line-height: 1.2;
@@ -122,7 +122,7 @@ margin-top: 70px;
 				Presupuesto
 					</span>
 
-					<div class="subtitulo">Cliente</div>
+					
 
 					<?php
 
@@ -130,8 +130,25 @@ margin-top: 70px;
 				$resultado_presupuesto = mysqli_query($connection , $consulta_presupuesto);
 				$rs_presupuesto = mysqli_fetch_array($resultado_presupuesto, MYSQL_ASSOC);
 						$id_cliente = $rs_presupuesto['idCliente'];
+						$id_estado = $rs_presupuesto['idEstado'];
+						$fecha_presupuesto = $rs_presupuesto['fecha'];
 
-						$consulta_cliente = "SELECT * FROM tbl_cliente WHERE idCliente = $id_cliente order by idCliente DESC";
+						
+
+						?>
+							<div class="subtitulo">Fecha de emisión</div>
+							<div class="col-md-3 contenedor_producto_existente">
+								<?=$fecha_presupuesto?>
+							</div>
+
+
+
+
+
+							<div class="subtitulo">Cliente</div>
+
+							<?php
+$consulta_cliente = "SELECT * FROM tbl_cliente WHERE idCliente = $id_cliente order by idCliente DESC";
 						$resultado_cliente = mysqli_query($connection , $consulta_cliente);
 						$rs_cliente = mysqli_fetch_array($resultado_cliente, MYSQL_ASSOC);
 
@@ -143,9 +160,7 @@ margin-top: 70px;
 								$telefono = $rs_cliente['telefono'];
 								$localidad = $rs_cliente['localidad'];
 								$provincia = $rs_cliente['provincia'];
-
-						?>
-
+								?>
 							<div class=" contenedor_producto_existente">
 
 								<p><span style="font-size: 18px; font-weight: 500;"><?=$nombre?> <?=$apellido?></span>  <strong> - DNI:</strong> <?=$dni?></p>
@@ -196,17 +211,31 @@ margin-top: 70px;
 							<p><strong>Cantidad:</strong> <?=$cantidad?></p>
 							<p><strong>Precio total:</strong> $<?=$precioTotal?></p>
 
-							<a href="procesos/eliminar_prodcuto.php?id_item_producto=$id_item_producto"><p style="font-weight: 600; text-align: right; text-decoration: none; color: red;">Eliminar</p></a>
+							
 							
 
 
 						</div>
 
+	<?php } ?>
+							<div class="subtitulo">Estado</div>
+
+							<?php
+
+							$consulta_estado= "SELECT * FROM tbl_estado WHERE idEstado = $id_estado LIMIT 1 ";
+							$resultado_estado = mysqli_query($connection , $consulta_estado);
+							$rs_estado = mysqli_fetch_array($resultado_estado, MYSQL_ASSOC);
+							$estado=$rs_estado['nombre'];
+							?>
+
+							<div class="col-md-3 contenedor_producto_existente">
+								<?=$estado?>
+							</div>
 
 
 
 
-					<?php } ?>
+				
 
 						<div class="form-group">
 		                <input type="submit" class="btn btn-primary" value="Presupuesto Terminado" onClick="volver_listado()">

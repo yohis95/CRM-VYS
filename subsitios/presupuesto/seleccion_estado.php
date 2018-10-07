@@ -4,7 +4,7 @@ require('../../objetos/generales/conexion.php');
 $link_error="../../index.php?error_usuario=si";
 require_once('../../objetos/generales/validar.php'); 
 
-
+$id_presupuesto = $_GET["id_presupuesto"];
 
 ?>
 
@@ -27,12 +27,22 @@ function cancelar() {
 
 function agregar() {		
 	
-			document.formulario.action = "procesos/agregar.php";
+			document.formulario.action = "procesos/agregar_estado.php?id_presupuesto=<?=$id_presupuesto?>";
 			document.formulario.submit();
 	
 }
 
+function validar_form(theForm) {
+	
+	if ( theForm.id_cliente.value == 0){
+		alert("Debe seleccionar un cliente");
+		theForm.id_cliente.focus();
+		return (false);
+	}
 
+		
+	return (true);
+}
 
 
 </script>
@@ -110,43 +120,34 @@ margin-top: 70px;
 	
 		<div class="container">
 			<div class="contenedor_formulario">
-				<form  name="formulario" method="POST" onSubmit="return validar_form(this)">
+				<form  name="formulario" method="POST">
 					<span class="titulo_formulario p-b-49">
-				Nuevo Presupuesto - Agregar Cliente
+				Nuevo Presupuesto - Estado
 					</span>
 
 					
 						
 
 						<div class="form-group col-md-6">
- 										<label for="id_cliente">Cliente</label>
-										<select class="form-control" id="id_cliente" name="id_cliente">
-										<option id="id_cliente" value="">Seleccione un Cliente</option>
+ 										<label for="id_estado">Estado del presupesto</label>
+										<select class="form-control" id="id_estado"  name="id_estado">
+										<option id="id_estado" value="">Seleccione un estado</option>
 	   										
  						<?php
 
- 				$consulta_clientes = "SELECT * FROM tbl_cliente ORDER BY idCliente ASC";
-				$resultado_clientes = mysqli_query($connection , $consulta_clientes);
+ 				$consulta_estados = "SELECT * FROM tbl_estado ORDER BY idEstado ASC";
+				$resultado_estados = mysqli_query($connection , $consulta_estados);
 
-				while($rs_clientes = mysqli_fetch_array($resultado_clientes, MYSQL_ASSOC)) {
+				while($rs_estados = mysqli_fetch_array($resultado_estados, MYSQL_ASSOC)) {
 					?>
 
-			 								<option id="id_cliente" value="<?=$rs_clientes['idCliente']?>"><?=$rs_clientes['nombre']?> <?=$rs_clientes['apellido']?> -  DNI: <?=$rs_clientes['dni']?></option>
+			 								<option id="id_estado" value="<?=$rs_estados['idEstado']?>"><?=$rs_estados['nombre']?> </option>
 	   										
 
 	   									<?php } ?>
    										</select>
 
 						</div>
-
-						
-
-				
-
-					
-				
-				
-
 
 					<div class="form-group ">
 		                <input type="submit" class="btn btn-primary" value="Cancelar" onClick="cancelar()">
