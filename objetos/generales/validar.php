@@ -47,9 +47,6 @@ else {
 window.top.location.href="<?=$link_error?>"
 </script>
 </head>
-<body>
-
-</body>
 </html>
 <?php
 	die();
@@ -57,4 +54,3 @@ window.top.location.href="<?=$link_error?>"
 ?>
 
 
-?>
