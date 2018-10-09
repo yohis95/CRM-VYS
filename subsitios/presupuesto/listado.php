@@ -155,9 +155,27 @@ tr:hover{
 <body>
 
 	<header>
-		<?php 
-		$direccion_imagen ="../../images/logo.png";
-		require('../../objetos/especificos/menu.php') ?>
+		<nav class="navbar navbar-expand-lg navbar-dark " style="background: white; border-bottom: 1px solid #D01262; margin-top:-50px; ">
+			<a href="../../principal.php" class="navbar-brand"><img src="../../images/logo.png" width="50"></a>
+			<button class="navbar-toggler" data-target="#navigation" data-control="navigation" data-toggle="collapse">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="nav navbar-nav">
+
+					<li class="nav-item">
+						<a href="../../subsitios/cliente/listado.php" class="nav-link" style="color: black; margin-top: 5px; padding: 0px 10px 0px 10px;">Clientes</a>
+					</li>
+					<li class="nav-item ">
+						<a href="../../subsitios/presupuesto/listado.php" class="nav-link" style="color: black; margin-top: 5px; border-left: 1px solid black; padding: 0px 10px 0px 10px;">Presupuestos</a>
+					</li>
+
+					<li class="nav-item">
+						<a href="../../objetos/generales/salir.php" class="nav-link" style="color: black; margin-top: 5px; border-left: 1px solid black; padding: 0px 10px 0px 10px;">Salir</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
 	</header>
 
 
