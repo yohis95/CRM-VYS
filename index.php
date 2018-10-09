@@ -137,7 +137,7 @@ margin-top: 70px;
 				?>
 				
 				<!--Action y method lo agregue para enlazarlo al archivo de php-->
-				<form name="formulario" action="principal.php" onSubmit="return validar_logueo(this)">
+				<form name="formulario" action="principal.php" method="POST" onSubmit="return validar_logueo(this)">
 					
 			
  										
