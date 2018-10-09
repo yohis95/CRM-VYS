@@ -138,7 +138,7 @@ table{
 td{
 	width: 300px;
 	padding: 10px;
-	color: #D01262;
+	color: black;
 
 }
 
@@ -248,8 +248,8 @@ tr:hover{
 							<td><?=$fecha?></td>
 							<td><?=$nombre_cliente?> <?=$apellido_cliente?></td>
 							<td><?=$nombre_estado?> </td>
-							<td><a href="" style="color:#D01262; font-size: 13px; ">Cambiar Estado</a></td>
-							<td><a href="procesos/eliminar_presupuesto.php?id_presupuesto=<?=$id_presupuesto?>&accion=eliminar" style="color:#D01262; font-size: 13px; ">Eliminar presupuesto</a></td>
+							<td><a href="modificar_estado.php?id_presupuesto=<?=$id_presupuesto?>" style="color:black; font-size: 13px; ">Cambiar Estado</a></td>
+							<td><a href="procesos/eliminar_presupuesto.php?id_presupuesto=<?=$id_presupuesto?>&accion=eliminar" style="color:black; font-size: 13px; ">Eliminar presupuesto</a></td>
 
 						</tr>
 
