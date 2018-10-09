@@ -27,7 +27,7 @@ function cancelar() {
 
 function agregar() {		
 
-			if(validar_form =='true')
+			if(validar_form(document.formulario) == true)
 			{
 			document.formulario.action = "procesos/agregar_cliente.php";
 			document.formulario.submit();
@@ -169,7 +169,7 @@ margin-top: 70px;
 		<div class="container">
 			<div class="contenedor_formulario">
 				<!--Action y method lo agregue para enlazarlo al archivo de php-->
-				<form  name="formulario" method="post" onSubmit="return validar_form(this)">
+				<form  name="formulario" method="post" >
 					<span class="titulo_formulario ">
 				Nuevo Cliente
 					</span>
