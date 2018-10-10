@@ -16,7 +16,7 @@ $resultado_agregar = mysqli_query($connection , $consulta_agregar);
 	
 if($resultado_agregar){
 	
-	$pagina = "../mostrar_presupuesto.php?id_presupuesto=$id_presupuesto";
+	$pagina = "../mostrar_presupuesto.php?id_presupuesto=$id_presupuesto&emisor=nuevo_presupuesto";
 
 	
 }

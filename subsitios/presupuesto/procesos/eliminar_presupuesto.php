@@ -12,18 +12,13 @@ foreach ($_GET as $key => $value ) {
 require('../../../objetos/generales/conexion.php');
 
 
-$consulta = "SELECT FROM tbl_itemproducto WHERE idPresupuesto = $id_presupuesto";
+$consulta = "SELECT * FROM tbl_itemproducto WHERE idPresupuesto = $id_presupuesto";
 $resultado = mysqli_query($connection , $consulta);
 
 if($resultado){
 
-$consulta_item_producto = "DELETE FROM tbl_itemproducto WHERE idPresupuesto = $id_presupuesto";
-$resultado_item_producto = mysqli_query($connection , $consulta_item_producto);
-		while($rs_item_producto = mysqli_fetch_array($resultado_item_producto, MYSQL_ASSOC)){
 
-			$id_item_producto = $rs_item_producto['idItemproducto'];
-
-			$consulta_eliminar = "DELETE FROM tbl_itemproducto WHERE idItemProducto = $id_item_producto";
+			$consulta_eliminar = "DELETE FROM tbl_itemproducto WHERE idPresupuesto = $id_presupuesto";
 			$resultado_eliminar = mysqli_query($connection , $consulta_eliminar);
 
 
@@ -74,7 +69,7 @@ $resultado_item_producto = mysqli_query($connection , $consulta_item_producto);
 			}
 					
 
-		} /*Fin while*/
+	
 	}else{
 
 		$consulta_eliminar = "DELETE FROM tbl_presupuesto WHERE idPresupuesto = $id_presupuesto";
@@ -113,7 +108,7 @@ $resultado_item_producto = mysqli_query($connection , $consulta_item_producto);
 <html>
 <head>
 <script language="JavaScript">
- window.top.location.href="<?=$pagina?>" 
+  window.top.location.href="<?=$pagina?>" 
 </script>
 </head>
 <body>
