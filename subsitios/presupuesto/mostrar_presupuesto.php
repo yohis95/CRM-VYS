@@ -5,6 +5,9 @@ $link_error="../../index.php?error_usuario=si";
 require_once('../../objetos/generales/validar.php'); 
 
 $id_presupuesto = $_GET["id_presupuesto"];
+$emisor = $_GET["emisor"];/*listado - nuevo_presupuesto*/
+require_once('../../objetos/generales/obtener_variables_get.php'); 
+
 
 
 ?>
@@ -19,10 +22,18 @@ $id_presupuesto = $_GET["id_presupuesto"];
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
-function volver_listado() {
+function volver_listado_nuevo() {
 	document.formulario.action = "listado.php?resultado=exito";
 	document.formulario.submit();
 }
+
+function volver_listado() {
+	document.formulario.action = "listado.php";
+	document.formulario.submit();
+}
+
+
+
 
 
 </script>
@@ -253,11 +264,26 @@ $consulta_cliente = "SELECT * FROM tbl_cliente WHERE idCliente = $id_cliente ord
 
 
 
-				
+				<?php
+							if($emisor == "nuevo_presupuesto"){
+
+				?>
 
 						<div class="form-group">
-		                <input type="submit" class="btn btn-primary" value="Presupuesto Terminado" onClick="volver_listado()">
-		       
+		                <input type="submit" class="btn btn-primary" value="Presupuesto Terminado" onClick="volver_listado_nuevo()">
+
+		            <?php }
+		            if($emisor == "listado"){ ?>
+
+		            	<div class="form-group">
+		                <input type="submit" class="btn btn-primary" value="Volver al listado" onClick="volver_listado()">
+
+
+					<?php
+		            }
+
+
+		           ?>		       
 		            	</div>    
 				</form>
 			</div>

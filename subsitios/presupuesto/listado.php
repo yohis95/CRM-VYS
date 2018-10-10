@@ -25,24 +25,6 @@ foreach ($_GET as $key => $value ) {
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<script type="text/javascript">
-function cancelar() {
-	document.formulario.action = "";
-	document.formulario.submit();
-}
-
-
-function agregar() {		
-	
-			document.formulario.action = "procesos/agregar.php";
-			document.formulario.submit();
-	
-}
-
-
-
-
-</script>
 
 <style type="">
 	
