@@ -241,6 +241,7 @@ tr:hover{
 							<td><?=$nombre?> <?=$apellido?></td>
 							<td>DNI:<?=$dni?> </td>
 							<td><a href="mostrar_cliente.php?id_cliente=<?=$id_cliente?>&emisor=listado" style="color:black; font-size: 13px; ">Mostrar Cliente</a></td>
+							<td><a href="modificar_cliente.php?id_cliente=<?=$id_cliente?>&emisor=listado" style="color:black; font-size: 13px; ">Modificar Cliente</a></td>
 							<td><a href="procesos/eliminar_cliente.php?id_cliente=<?=$id_cliente?>" style="color:black; font-size: 13px; ">Eliminar cliente</a></td>
 
 						</tr>
