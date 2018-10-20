@@ -5,7 +5,7 @@ $link_error="../../index.php?error_usuario=si";
 require_once('../../objetos/generales/validar.php'); 
 
 
-
+$emisor = $_GET['emisor'];
 $id_presupuesto = $_GET["id_presupuesto"];
 
 ?>
@@ -29,7 +29,7 @@ function cancelar() {
 
 function modificar() {		
 	
-			document.formulario.action = "procesos/modificar_estado.php?id_presupuesto=<?=$id_presupuesto?>";
+			document.formulario.action = "procesos/modificar_estado.php?id_presupuesto=<?=$id_presupuesto?>&emisor=<?=$emisor?>";
 			document.formulario.submit();
 	
 }

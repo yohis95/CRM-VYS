@@ -248,8 +248,10 @@ tr:hover{
 							<td><?=$fecha?></td>
 							<td><?=$nombre_cliente?> <?=$apellido_cliente?></td>
 							<td><?=$nombre_estado?> </td>
-							<td><a href="modificar_estado.php?id_presupuesto=<?=$id_presupuesto?>" style="color:black; font-size: 13px; ">Cambiar Estado</a></td>
-							<td><a href="procesos/eliminar_presupuesto.php?id_presupuesto=<?=$id_presupuesto?>&accion=eliminar" style="color:black; font-size: 13px; ">Eliminar presupuesto</a></td>
+							<td><a href="modificar_estado.php?id_presupuesto=<?=$id_presupuesto?>&emisor=listado" style="color:black; font-size: 13px; ">Cambiar Estado</a></td>
+							<td><a href="mostrar_presupuesto.php?id_presupuesto=<?=$id_presupuesto?>&emisor=listado" style="color:black; font-size: 13px; ">Mostrar </a></td>
+							<td><a href="reutilizar.php?id_presupuesto_anterior=<?=$id_presupuesto?>" style="color:black; font-size: 13px; ">Reutilizar</a></td>
+							<td><a href="procesos/eliminar_presupuesto.php?id_presupuesto=<?=$id_presupuesto?>&accion=eliminar" style="color:black; font-size: 13px; ">Eliminar</a></td>
 
 						</tr>
 
