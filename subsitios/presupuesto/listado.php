@@ -212,7 +212,7 @@ tr:hover{
 				?>
 
 
-				<a href="seleccion_cliente.php"> <div class="contenedor_nuevo">
+				<a href="agregar_cliente.php"> <div class="contenedor_nuevo">
 					Nuevo presupuesto
 				</div></a>
 
@@ -228,8 +228,13 @@ tr:hover{
 						$id_cliente=$rs_presupuestos['idCliente'];
 						$id_estado=$rs_presupuestos['idEstado'];
 						$fecha=$rs_presupuestos['fecha'];
+						$tipo_cliente = $rs_presupuestos['tipo_cliente'];
 
-						$consulta_cliente= "SELECT * FROM tbl_cliente WHERE idCliente = $id_cliente";
+							if($tipo_cliente == 1){
+								$consulta_cliente= "SELECT * FROM tbl_cliente WHERE idCliente = $id_cliente";
+							}if ($tipo_cliente == 0){
+								$consulta_cliente= "SELECT * FROM tbl_clienteesporadico WHERE idClienteEsporadico = $id_cliente";
+							}
 						$resultado_cliente = mysqli_query($connection , $consulta_cliente);
 						$rs_cliente = mysqli_fetch_array($resultado_cliente, MYSQL_ASSOC);
 						$nombre_cliente=$rs_cliente['nombre'];

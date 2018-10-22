@@ -161,6 +161,7 @@ margin-top: 70px;
 						$id_cliente = $rs_presupuesto['idCliente'];
 						$id_estado = $rs_presupuesto['idEstado'];
 						$fecha_presupuesto = $rs_presupuesto['fecha'];
+						$tipo_cliente = $rs_presupuesto['tipo_cliente'];
 
 						
 
@@ -176,8 +177,12 @@ margin-top: 70px;
 
 							<div class="subtitulo">Cliente</div>
 
-							<?php
-$consulta_cliente = "SELECT * FROM tbl_cliente WHERE idCliente = $id_cliente order by idCliente DESC";
+							<?php 
+							if($tipo_cliente == 1){
+						$consulta_cliente = "SELECT * FROM tbl_cliente WHERE idCliente = $id_cliente order by idCliente DESC";
+							}if($tipo_cliente == 0){
+						$consulta_cliente = "SELECT * FROM tbl_clienteesporadico WHERE idClienteEsporadico = $id_cliente order by idClienteEsporadico DESC";
+							}
 						$resultado_cliente = mysqli_query($connection , $consulta_cliente);
 						$rs_cliente = mysqli_fetch_array($resultado_cliente, MYSQL_ASSOC);
 
