@@ -4,6 +4,20 @@ require('../../objetos/generales/conexion.php');
 $link_error="../../index.php?error_usuario=si";
 require_once('../../objetos/generales/validar.php'); 
 
+$filtro = "";
+$provincia = "";
+
+foreach ($_GET as $key => $value ) {
+   if (isset($_GET[$key])){
+   	$$key = $value;
+}
+}
+foreach ($_POST as $key => $value ) {
+   if (isset($_POST[$key])){
+   	$$key = $value;
+}
+}
+
 
 
 
@@ -18,35 +32,6 @@ require_once('../../objetos/generales/validar.php');
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<script type="text/javascript">
-
-
-
-function estadistica_sin_filtro() {
-
-			
-			document.formulario.action = "procesos/estadistica_sin_filtro.php";
-			document.formulario.submit();
-		
-	
-}
-
-
-function estadistica_provincia() {
-
-			
-			document.formulario.action = "procesos/estadistica_provincia.php";
-			document.formulario.submit();
-		
-	
-}
-
-
-
-
-</script>
-
 <style type="">
 	
 	.contenedor_formulario {
@@ -137,7 +122,7 @@ margin-top: 70px;
 						<a href="../../subsitios/presupuesto/listado.php" class="nav-link" style="color: black; margin-top: 5px; border-left: 1px solid black; padding: 0px 10px 0px 10px;">Presupuestos</a>
 					</li>
 					<li class="nav-item ">
-						<a href="subsitios/estadisticas/seleccion_estadisticas.php" class="nav-link" style="color: black; margin-top: 5px; border-left: 1px solid black; padding: 0px 10px 0px 10px;">Estadisticas</a>
+						<a href="../../subsitios/estadisticas/seleccion_estadisticas.php" class="nav-link" style="color: black; margin-top: 5px; border-left: 1px solid black; padding: 0px 10px 0px 10px;">Estadisticas</a>
 					</li>
 					<li class="nav-item">
 						<a href="../../objetos/generales/salir.php" class="nav-link" style="color: black; margin-top: 5px; border-left: 1px solid black; padding: 0px 10px 0px 10px;">Salir</a>
@@ -152,21 +137,65 @@ margin-top: 70px;
 	
 		<div class="container">
 			<div class="contenedor_formulario">
-				<form  name="formulario" method="POST" id="form">
+				<form  name="formulario" method="POST" action="seleccion_estadisticas.php?filtro=si">
 					<span class="titulo_formulario p-b-49">
 				Estadisticas sobre estados de presupuestos
 					</span>
 
 					
-					<div class="subtitulo">Seleccione la opcion deseada</div>
+					<div class="subtitulo">Filtro por provincia</div>
 					<br>
 
-					<div class="form-group ">
-		                <input type="submit" class="btn btn-primary" value="Estadisticas sin filtro" onClick="estadistica_sin_filtro()">
-		                
-		                <input type="submit" class="btn btn-primary"   value="Estadisticas filtradas por provincia" onClick="estadistica_provincia()">
-		            </div> 
-			</div>
+							<div class="form-group col-md-6">
+										<select class="form-control" id="provincia" name="provincia">
+						<option name="provincia" id="provincia" value="">Selecciona una provincia</option>
+    			<?php
+    			$consulta_provincias = "SELECT * FROM tbl_provincias";
+    			$resultado_provincias = mysqli_query($connection , $consulta_provincias);
+				while($rs_provincias = mysqli_fetch_array($resultado_provincias, MYSQL_ASSOC)){
+					if($provincia == $rs_provincias['idProvincia'] ){
+    			?>
+    			<option name="provincia" id="provincia" selected value="<?=$rs_provincias['idProvincia']?>"><?=$rs_provincias['provincia']?> </option>
+    			<?php
+    			}else{
+    				?>
+    				<option name="provincia" id="provincia"  value="<?=$rs_provincias['idProvincia']?>"><?=$rs_provincias['provincia']?> </option>
+    				<?php
+    			}
+}
+    			?>
+    		</select>
+								</div>
+								
+
+							<div class="form-group ">
+		                	<input type="submit" class="btn btn-primary" value="Aplicar filtro" >
+		            		</div>
+			
+		            			<div class="subtitulo">Resultado </div>
+		            			<br>
+
+
+		            <?php
+
+		            if($filtro == 'si'){
+		            		require_once('procesos/estadistica_provincia.php'); 
+		            }else{
+		            		require_once('procesos/estadistica_sin_filtro.php'); 
+		            }
+
+		            ?>
+		      
+		        	<div class="descripcion" style="color: red; padding-left: 5px; padding-top: 5px; font-weight: 500;">Presupuestos cancelados - <?=$porcentaje_cancelado?>%</div> 
+		        	<div class="cancelado" style="background: red; height: 35px; width: <?=$porcentaje_cancelado?>%; "></div>
+		        	<br>
+		        	<div class="descripcion" style="color: orange; padding-left: 5px; padding-top: 5px; font-weight: 500;">Presupuestos en espera - <?=$porcentaje_espera?>% </div>
+		        	<div class="en_espera" style="background: orange; height: 35px; width: <?=$porcentaje_espera?>%; "></div>
+		        	<br>
+		        	<div class="descripcion" style="color: green; padding-left: 5px; padding-top: 5px; font-weight: 500;">Presupuestos Aceptados - <?=$porcentaje_confirmado?>%</div>
+		        	<div class="aceptado" style="background: green; height: 35px; width: <?=$porcentaje_confirmado?>%; "> </div>
+
+		    </div>
 		        </form>
 		    </div>
 		</div>
