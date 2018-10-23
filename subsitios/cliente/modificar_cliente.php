@@ -16,7 +16,7 @@ $id_cliente = $_GET["id_cliente"];
 						$localidad = $rs_cliente['localidad'];
 						$email= $rs_cliente['email'];
 						$telefono= $rs_cliente['telefono'];
-						$provincia= $rs_cliente['provincia'];
+						$id_provincia= $rs_cliente['idProvincia'];
 
 ?>
 
@@ -264,9 +264,26 @@ margin-top: 70px;
 
     		<div class="form-group col-md-6"> <br>
     			<label for="provincia">Provincia</label> <br>
-    			<input type="text" class="form-control" name="provincia" id="provincia" value="<?=$provincia?>" placeholder="Ingrese provincia">
+    			<select class="form-control" id="provincia" name="provincia">
+						<option name="provincia" id="provincia" value="">Selecciona una provincia</option>
+    			<?php
+    			$consulta_provincias = "SELECT * FROM tbl_provincias";
+    			$resultado_provincias = mysqli_query($connection , $consulta_provincias);
+				while($rs_provincias = mysqli_fetch_array($resultado_provincias, MYSQL_ASSOC)){
+					if($id_provincia == $rs_provincias['idProvincia'] ){
+    			?>
+    			<option name="provincia" id="provincia" selected value="<?=$rs_provincias['idProvincia']?>"><?=$rs_provincias['provincia']?> </option>
+    			<?php
+    			}else{
+    				?>
+    				<option name="provincia" id="provincia"  value="<?=$rs_provincias['idProvincia']?>"><?=$rs_provincias['provincia']?> </option>
+    				<?php
+    			}
+}
+    			?>
+    		</select>
+    			
     		</div>
-
 
     	<!--	<div class="form-group ">
  										<label for="email">Nombre y apellido</label>
