@@ -17,7 +17,7 @@ require('../../../objetos/generales/conexion.php');
 			
 
 
-$consulta_agregar = "INSERT INTO tbl_cliente (nombre, apellido, dni, domicilio, email, telefono, localidad, provincia) VALUES('$nombre', '$apellido', $dni, '$domicilio', '$email', '$telefono', '$localidad', '$provincia')";
+$consulta_agregar = "INSERT INTO tbl_cliente (nombre, apellido, dni, domicilio, email, telefono, localidad, idProvincia) VALUES('$nombre', '$apellido', $dni, '$domicilio', '$email', '$telefono', '$localidad', '$provincia')";
 
 $resultado_agregar = mysqli_query($connection , $consulta_agregar);
 

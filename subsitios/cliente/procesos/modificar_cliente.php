@@ -17,8 +17,7 @@ require('../../../objetos/generales/conexion.php');
 		$id_cliente = $_POST['id_cliente'];
 			
 
-
-$consulta_agregar = "UPDATE tbl_cliente SET nombre = '$nombre', apellido = '$apellido', dni = $dni, domicilio='$domicilio', email='$email', telefono='$telefono', localidad='$localidad', provincia='$provincia' WHERE idCliente = $id_cliente";
+$consulta_agregar = "UPDATE tbl_cliente SET nombre = '$nombre', apellido = '$apellido', dni = $dni, domicilio='$domicilio', email='$email', telefono='$telefono', localidad='$localidad', idProvincia = $provincia WHERE idCliente = $id_cliente";
 
 $resultado_agregar = mysqli_query($connection , $consulta_agregar);
 
