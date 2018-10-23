@@ -321,7 +321,20 @@ margin-top: 70px;
 
     		<div class="form-group col-md-6"> <br>
     			<label for="provincia">Provincia</label> <br>
-    			<input type="text" class="form-control" name="provincia" id="provincia" placeholder="Ingrese provincia">
+    			<select class="form-control" id="provincia" name="provincia">
+						<option id="provincia" value="">Selecciona una provincia</option>
+    			<?php
+    			$consulta_provincias = "SELECT * FROM tbl_provincias";
+    			$resultado_provincias = mysqli_query($connection , $consulta_provincias);
+				while($rs_provincias = mysqli_fetch_array($resultado_provincias, MYSQL_ASSOC)){
+    			?>
+    			<option id="provincia" value="<?=$rs_provincias['idProvincia']?>"><?=$rs_provincias['provincia']?></option>
+    			<?php
+}
+    			?>
+    		</select>
+    	</div>
+    			
     		</div>
 
 

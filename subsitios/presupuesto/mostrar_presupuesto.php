@@ -195,7 +195,11 @@ margin-top: 70px;
 								$email = $rs_cliente['email'];
 								$telefono = $rs_cliente['telefono'];
 								$localidad = $rs_cliente['localidad'];
-								$provincia = $rs_cliente['provincia'];
+								$provincia = $rs_cliente['idProvincia'];
+								$consulta= "SELECT * FROM tbl_provincias WHERE idProvincia = $provincia";
+								$resultado = mysqli_query($connection , $consulta);
+								$rs_resultado = mysqli_fetch_array($resultado, MYSQL_ASSOC);
+								$provincia = $rs_resultado['provincia'];
 								?>
 							<div class=" contenedor_producto_existente">
 
