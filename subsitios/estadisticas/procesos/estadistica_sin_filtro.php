@@ -6,9 +6,10 @@ require('../../../objetos/generales/conexion.php');
 
 
 		
-$consulta= "SELECT * FROM tbl_presupuesto";
+$consulta= "SELECT * FROM tbl_presupuesto WHERE idCliente = 5";
 $result = mysqli_query($connection , $consulta);
-$filas = myqsli_num_rows($result);
+
+$filas = mysqli_num_rows($resultado_presupuestos)
 echo $filas;
 
 
