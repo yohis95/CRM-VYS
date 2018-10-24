@@ -3,7 +3,7 @@ session_start();
 require('../../objetos/generales/conexion.php');
 $link_error="../../index.php?error_usuario=si";
 require_once('../../objetos/generales/validar.php'); 
-define('MYSQL_ASSOC',MYSQLI_ASSOC);
+
 $id_cliente = $_GET["id_cliente"];
 
 			$consulta_cliente = "SELECT * FROM tbl_cliente WHERE idCliente = $id_cliente";
