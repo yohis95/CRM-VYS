@@ -1,7 +1,7 @@
 <?php
 
 
-require('../../../objetos/generales/conexion.php');
+require('../../objetos/generales/conexion.php');
 
 
 		
