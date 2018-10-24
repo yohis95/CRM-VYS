@@ -172,6 +172,7 @@ margin-top: 70px;
 						$id_cliente = $rs_presupuesto['idCliente'];
 						$id_estado = $rs_presupuesto['idEstado'];
 						$fecha_presupuesto = $rs_presupuesto['fecha'];
+						$tipo_cliente = $rs_presupuesto['tipo_cliente'];
 
 						
 
@@ -179,7 +180,11 @@ margin-top: 70px;
 							<div class="subtitulo">Cliente</div>
 
 							<?php
-$consulta_cliente = "SELECT * FROM tbl_cliente WHERE idCliente = $id_cliente order by idCliente DESC";
+						if($tipo_cliente == 1){
+								$consulta_cliente= "SELECT * FROM tbl_cliente WHERE idCliente = $id_cliente";
+							}if ($tipo_cliente == 0){
+								$consulta_cliente= "SELECT * FROM tbl_clienteesporadico WHERE idClienteEsporadico = $id_cliente";
+							}
 						$resultado_cliente = mysqli_query($connection , $consulta_cliente);
 						$rs_cliente = mysqli_fetch_array($resultado_cliente, MYSQL_ASSOC);
 
@@ -190,7 +195,11 @@ $consulta_cliente = "SELECT * FROM tbl_cliente WHERE idCliente = $id_cliente ord
 								$email = $rs_cliente['email'];
 								$telefono = $rs_cliente['telefono'];
 								$localidad = $rs_cliente['localidad'];
-								$provincia = $rs_cliente['provincia'];
+								$provincia = $rs_cliente['idProvincia'];
+								$consulta = "SELECT * FROM tbl_provincias WHERE idProvincia = $provincia";
+								$resultado = mysqli_query($connection , $consulta);
+								$rs_provincia = mysqli_fetch_array($resultado, MYSQL_ASSOC);
+								$provincia = $rs_provincia['provincia'];
 								?>
 							<div class=" contenedor_producto_existente">
 
@@ -198,7 +207,7 @@ $consulta_cliente = "SELECT * FROM tbl_cliente WHERE idCliente = $id_cliente ord
 								<p><strong>Domicilio:</strong> <?=$domicilio?>   <strong>- Localidad:</strong> <?=$localidad?>   <strong>- Provincia:</strong>   <?=$provincia?></p>
 								<p><strong>Email:</strong> <?=$email?>     <strong>-  Telefono:</strong> <?=$telefono?></p>
 								
-								<a href="procesos/eliminar_producto.php?id_presupuesto=<?=$id_presupuesto?>&id_item_producto=<?=$id_item_producto?>&destino=seleccion"><p style="font-weight: 600; text-align: right; text-decoration: none; color: red;">Seleccionar otro Cliente</p></a>
+								<a href="cambiar_cliente.php?id_presupuesto=<?=$id_presupuesto?>"><p style="font-weight: 600; text-align: right; text-decoration: none; color: red;">Seleccionar otro Cliente</p></a>
 
 							</div>
 
