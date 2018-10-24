@@ -3,7 +3,7 @@ session_start();
 require('../../objetos/generales/conexion.php');
 $link_error="../../index.php?error_usuario=si";
 require_once('../../objetos/generales/validar.php'); 
-define('MYSQL_ASSOC',MYSQLI_ASSOC);
+
 $resultado = "";
 $resultado_accion = "";
 
