@@ -1,7 +1,7 @@
 <?php
 
 
-
+require('../../objetos/generales/conexion.php');
 		
 $consulta= "SELECT * FROM tbl_presupuesto";
 $resultado = mysqli_query($connection , $consulta);
