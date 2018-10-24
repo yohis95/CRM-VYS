@@ -25,7 +25,7 @@ $cantidad_cancelado = mysqli_num_rows($resultado_cancelado);
 		$porcentaje_cancelado=0;
 	}
 
-echo "El porcentaje de presupuestos con estado 'Cancelado' es de" . $porcentaje_cancelado ."%";
+/*echo "El porcentaje de presupuestos con estado 'Cancelado' es de" . $porcentaje_cancelado ."%";*/
 
 $consulta_espera= "SELECT * FROM tbl_presupuesto WHERE idEstado = 2 ";
 $resultado_espera = mysqli_query($connection , $consulta_espera);
@@ -39,7 +39,7 @@ $cantidad_espera = mysqli_num_rows($resultado_espera);
 		$porcentaje_espera = 0;
 	}
 
-echo "El porcentaje de presupuestos con estado 'En Espera' es de" . $porcentaje_espera ."%";
+/*echo "El porcentaje de presupuestos con estado 'En Espera' es de" . $porcentaje_espera ."%";*/
 
 $consulta_confirmado= "SELECT * FROM tbl_presupuesto WHERE idEstado = 3 ";
 $resultado_confirmado = mysqli_query($connection , $consulta_confirmado);
@@ -53,7 +53,7 @@ $cantidad_confirmado = mysqli_num_rows($resultado_confirmado);
 		$porcentaje_confirmado = 0;
 	}
 
-	echo "El porcentaje de presupuestos con estado 'Confirmado' es de" . $porcentaje_confirmado ."%";
+	/*echo "El porcentaje de presupuestos con estado 'Confirmado' es de" . $porcentaje_confirmado ."%";*/
 }
 
 
