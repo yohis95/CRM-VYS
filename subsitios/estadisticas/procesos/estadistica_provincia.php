@@ -1,34 +1,70 @@
 <?php
 
 
+$consulta_clientes = "SELECT * FROM tbl_cliente WHERE idProvincia = $provincia";
+$resultado_clientes = mysqli_query($connection , $consulta_clientes);
 
-		
-$consulta= "SELECT * FROM tbl_presupuesto";
-$resultado = mysqli_query($connection , $consulta);
-$cantidad_total = mysqli_num_rows($resultado);
 
-if($cantidad_total > 0)
-{
+$consulta_clientes_esporadicos = "SELECT * FROM tbl_clienteesporadico WHERE idProvincia = $provincia";
+$resultado_clientes_esporadicos = mysqli_query($connection , $consulta_clientes_esporadicos);
 
-$consulta_cancelado= "SELECT * FROM tbl_presupuesto WHERE idEstado = 1";
-$resultado_cancelado = mysqli_query($connection , $consulta_cancelado); 
-while($rs_cancelado = mysqli_fetch_array($resultado_cancelado, MYSQL_ASSOC)){
+/*Para calcular cantidad total de presupuestos*/
+$cantidad_total = 0;
+while($rs_clientes = mysqli_fetch_array($resultado_clientes, MYSQL_ASSOC)){
+	$consulta= "SELECT * FROM tbl_presupuesto WHERE tipo_cliente = 1";
+	$resultado = mysqli_query($connection , $consulta);
+	while($rs = mysqli_fetch_array($resultado, MYSQL_ASSOC)){
+		if($rs_clientes['idCliente'] == $rs['idCliente']){
+			$cantidad_total = $cantidad_total + 1;
+		}
+	}
+}
+while($rs_clientes_esporadicos = mysqli_fetch_array($resultado_clientes_esporadicos, MYSQL_ASSOC)){
+	$consulta= "SELECT * FROM tbl_presupuesto WHERE tipo_cliente = 0";
+	$resultado = mysqli_query($connection , $consulta);
+	while($rs = mysqli_fetch_array($resultado, MYSQL_ASSOC)){
+		if($rs_clientes_esporadicos['idClienteEsporadico'] == $rs['idCliente']){
+			$cantidad_total = $cantidad_total + 1;
+		}
+	}
+}
 
-	$id_cliente = $rs_cancelado['idCliente'];
-	$tipo_cliente = $rs_cancelado['tipo_cliente'];
 
-	
-	$cantidad_cancelado = 0;
-	$consulta_cliente = "SELECT * FROM tbl_cliente WHERE idCliente = $id_cliente"; 
 
-	$resultado_cliente = mysqli_query($connection , $consulta_cliente);
-	$rs_cliente = mysqli_fetch_array($resultado_cliente, MYSQL_ASSOC);
+/*Consulta cancelado*/
+$cantidad_cancelado=0;
+$consulta_clientes = "SELECT * FROM tbl_cliente WHERE idProvincia = $provincia";
+$resultado_clientes = mysqli_query($connection , $consulta_clientes);
 
-		if($rs_cliente['idProvincia'] == $provincia){
+
+$consulta_clientes_esporadicos = "SELECT * FROM tbl_clienteesporadico WHERE idProvincia = $provincia";
+$resultado_clientes_esporadicos = mysqli_query($connection , $consulta_clientes_esporadicos);
+/*Clientes existentes*/
+
+while($rs_clientes = mysqli_fetch_array($resultado_clientes, MYSQL_ASSOC)){
+	$id_cliente = $rs_clientes['idCliente'];
+
+	$consulta_cancelado= "SELECT * FROM tbl_presupuesto WHERE idEstado = 1 AND tipo_cliente=1";
+	$resultado_cancelado = mysqli_query($connection , $consulta_cancelado); 
+	while($rs_cancelado= mysqli_fetch_array($resultado_cancelado, MYSQL_ASSOC)){
+		if($rs_cancelado['idCliente'] == $id_cliente){
 			$cantidad_cancelado = $cantidad_cancelado + 1;
 		}
-
 	}
+}
+/*Clientes esporadicos*/
+while($rs_clientes_esporadicos = mysqli_fetch_array($resultado_clientes_esporadicos, MYSQL_ASSOC)){
+
+	$id_cliente = $rs_clientes_esporadicos['idClienteEsporadico'];
+
+	$consulta_cancelado= "SELECT * FROM tbl_presupuesto WHERE idEstado = 1 AND tipo_cliente=0";
+	$resultado_cancelado = mysqli_query($connection , $consulta_cancelado); 
+	while($rs_cancelado= mysqli_fetch_array($resultado_cancelado, MYSQL_ASSOC)){
+		if($rs_cancelado['idCliente'] == $id_cliente){
+			$cantidad_cancelado = $cantidad_cancelado + 1;
+		}
+	}
+}
 
 	if($cantidad_cancelado > 0)
 	{
@@ -38,24 +74,39 @@ while($rs_cancelado = mysqli_fetch_array($resultado_cancelado, MYSQL_ASSOC)){
 		$porcentaje_cancelado=0;
 }
 
-$consulta_espera= "SELECT * FROM tbl_presupuesto WHERE idEstado = 2 ";
-$resultado_espera = mysqli_query($connection , $consulta_espera);
-while($rs_espera = mysqli_fetch_array($resultado_espera, MYSQL_ASSOC)){
+/*Consulta en espera*/
+$cantidad_espera=0;
+$consulta_clientes = "SELECT * FROM tbl_cliente WHERE idProvincia = $provincia";
+$resultado_clientes = mysqli_query($connection , $consulta_clientes);
 
-	$id_cliente = $rs_espera['idCliente'];
-$cantidad_espera = 0;
-	$consulta_cliente = "SELECT * FROM tbl_cliente WHERE idCliente = $id_cliente";
+$consulta_clientes_esporadicos = "SELECT * FROM tbl_clienteesporadico WHERE idProvincia = $provincia";
+$resultado_clientes_esporadicos = mysqli_query($connection , $consulta_clientes_esporadicos);
+/*Clientes existentes*/
 
-	$resultado_cliente = mysqli_query($connection , $consulta_cliente);
-	$rs_cliente = mysqli_fetch_array($resultado_cliente, MYSQL_ASSOC);
+while($rs_clientes = mysqli_fetch_array($resultado_clientes, MYSQL_ASSOC)){
+	$id_cliente = $rs_clientes['idCliente'];
 
+	$consulta_cancelado= "SELECT * FROM tbl_presupuesto WHERE idEstado = 2 AND tipo_cliente=1";
+	$resultado_cancelado = mysqli_query($connection , $consulta_cancelado); 
+	while($rs_cancelado= mysqli_fetch_array($resultado_cancelado, MYSQL_ASSOC)){
+		if($rs_cancelado['idCliente'] == $id_cliente){
+			$cantidad_espera= $cantidad_espera + 1;
+		}
+	}
+}
+/*Clientes esporadicos*/
+while($rs_clientes_esporadicos = mysqli_fetch_array($resultado_clientes_esporadicos, MYSQL_ASSOC)){
 
-		if($rs_cliente['idProvincia'] == $provincia){
+	$id_cliente = $rs_clientes_esporadicos['idClienteEsporadico'];
+
+	$consulta_cancelado= "SELECT * FROM tbl_presupuesto WHERE idEstado = 2 AND tipo_cliente=0";
+	$resultado_cancelado = mysqli_query($connection , $consulta_cancelado); 
+	while($rs_cancelado= mysqli_fetch_array($resultado_cancelado, MYSQL_ASSOC)){
+		if($rs_cancelado['idCliente'] == $id_cliente){
 			$cantidad_espera = $cantidad_espera + 1;
 		}
-
 	}
-
+}
 
 	if($cantidad_espera > 0)
 	{
@@ -65,23 +116,39 @@ $cantidad_espera = 0;
 		$porcentaje_espera = 0;
 	}
 
+/*Consulta acetados*/
+$cantidad_confirmado=0;
+$consulta_clientes = "SELECT * FROM tbl_cliente WHERE idProvincia = $provincia";
+$resultado_clientes = mysqli_query($connection , $consulta_clientes);
 
+$consulta_clientes_esporadicos = "SELECT * FROM tbl_clienteesporadico WHERE idProvincia = $provincia";
+$resultado_clientes_esporadicos = mysqli_query($connection , $consulta_clientes_esporadicos);
+/*Clientes existentes*/
 
-$consulta_confirmado= "SELECT * FROM tbl_presupuesto WHERE idEstado = 3 ";
-$resultado_confirmado = mysqli_query($connection , $consulta_confirmado);
-while($rs_confirmado = mysqli_fetch_array($resultado_confirmado, MYSQL_ASSOC)){
-	$cantidad_confirmado = 0;
-	$id_cliente = $rs_confirmado['idCliente'];
-	$consulta_cliente = "SELECT * FROM tbl_cliente WHERE idCliente = $id_cliente";
-	$resultado_cliente = mysqli_query($connection , $consulta_cliente);
-	$rs_cliente = mysqli_fetch_array($resultado_cliente, MYSQL_ASSOC);
+while($rs_clientes = mysqli_fetch_array($resultado_clientes, MYSQL_ASSOC)){
+	$id_cliente = $rs_clientes['idCliente'];
 
-		if($rs_cliente['idProvincia'] == $provincia){
+	$consulta_cancelado= "SELECT * FROM tbl_presupuesto WHERE idEstado = 3 AND tipo_cliente=1";
+	$resultado_cancelado = mysqli_query($connection , $consulta_cancelado); 
+	while($rs_cancelado= mysqli_fetch_array($resultado_cancelado, MYSQL_ASSOC)){
+		if($rs_cancelado['idCliente'] == $id_cliente){
+			$cantidad_confirmado= $cantidad_confirmado + 1;
+		}
+	}
+}
+/*Clientes esporadicos*/
+while($rs_clientes_esporadicos = mysqli_fetch_array($resultado_clientes_esporadicos, MYSQL_ASSOC)){
+
+	$id_cliente = $rs_clientes_esporadicos['idClienteEsporadico'];
+
+	$consulta_cancelado= "SELECT * FROM tbl_presupuesto WHERE idEstado = 3 AND tipo_cliente=0";
+	$resultado_cancelado = mysqli_query($connection , $consulta_cancelado); 
+	while($rs_cancelado= mysqli_fetch_array($resultado_cancelado, MYSQL_ASSOC)){
+		if($rs_cancelado['idCliente'] == $id_cliente){
 			$cantidad_confirmado = $cantidad_confirmado + 1;
 		}
-
 	}
-
+}
 	if($cantidad_confirmado > 0)
 	{
 		$porcentaje_confirmado=(($cantidad_confirmado * 100) / $cantidad_total);
@@ -91,7 +158,6 @@ while($rs_confirmado = mysqli_fetch_array($resultado_confirmado, MYSQL_ASSOC)){
 	}
 
 	
-}
 
 
 	
